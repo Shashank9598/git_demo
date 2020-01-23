@@ -4,31 +4,38 @@
             <hr color="darkorange" width="200px"/>
             <div class="content">
                 <p v-for='item in obj' :key="item.name" class="con">
-                    <input type="checkbox"> 
+                    <input type="checkbox" v-model="obj.name"> 
                     {{item.name}}
                 </p>  
             </div>
-            <input type="button" class="add" value="add">
+            <input type="button" class="add" value="add" @click="addToAPI">
             <input type="button" class="clear" value="clear"/>
             <input type="button" class="select_all" value="select_all"/>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
+
 export default {
     name: 'Workinglist',
     data() {
         return {
                 obj: [
-                    {name : 'shashank'},
-                    {name : 'sha'},
-                    {name : 'abc'},
-                    {name : 'def'},
-                    {name : 'ghi'},
-                    {name : 'jkl'}
+                    {name : ''},
                 ]
         }
-    } 
+    },
+    methods : {
+        addToAPI(){
+            let newObj = {
+                name : this.obj.name
+            }
+            //console.log(newObj);
+            axios.post('');
+        }
+    }
 }
 </script>
 
