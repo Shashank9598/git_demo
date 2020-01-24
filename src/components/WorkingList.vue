@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 
 export default {
@@ -23,18 +23,12 @@ export default {
     data() {
         return {
                 obj: [
-                    {name : ''},
+                    {name : ''}
                 ]
         }
     },
-    methods : {
-        addToAPI(){
-            let newObj = {
-                name : this.obj.name
-            }
-            //console.log(newObj);
-            axios.post('');
-        }
+    mounted() {
+        console.log('component mounted');
     }
 }
 </script>
