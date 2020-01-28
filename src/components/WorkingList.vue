@@ -4,11 +4,11 @@
             <hr color="darkorange" width="200px"/>
             <div class="content">
                 <p v-for='item in obj' :key="item.name" class="con">
-                    <input type="checkbox" v-model="obj.name"> 
+                    <input type="checkbox"  v-model="obj.name"> 
                     {{item.name}}
                 </p>  
             </div>
-            <input type="button" class="add" value="add" @click="addToAPI">
+            <input type="button" class="add" value="add" v-on:click.prevent="addtodo">
             <input type="button" class="clear" value="clear"/>
             <input type="button" class="select_all" value="select_all"/>
     </div>
@@ -17,18 +17,21 @@
 <script>
 // import axios from 'axios';
 
-
 export default {
     name: 'Workinglist',
     data() {
         return {
-                obj: [
-                    {name : ''}
-                ]
+            obj: [
+                {name : 'shashank'},
+                {name : 'sabs'}
+            ],
+            add:'scz'
         }
     },
-    mounted() {
-        console.log('component mounted');
+    methods: {
+        addtodo:function() {
+            this.obj.name.push(this.add)
+        }
     }
 }
 </script>
