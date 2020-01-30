@@ -1,16 +1,16 @@
 <template>
     <div class="border">
-            <input type="text" class="todo" placeholder="Write here"/>
+            <input type="text" class="todo" placeholder="Write here" v-model="todo.name"/>
             <hr color="darkorange" width="200px"/>
             <div class="content">
-                <p v-for='item in obj' :key="item.name" class="con">
-                    <input type="checkbox"  v-model="obj.name"> 
+                <p v-for='item in todos' :key="item.name" class="con">
+                    <input type="checkbox"  v-model="todos.name"> 
                     {{item.name}}
                 </p>  
             </div>
-            <input type="button" class="add" value="add" v-on:click.prevent="addtodo">
+            <input type="button" class="add" value="add" v-on:click.prevent="post">
             <input type="button" class="clear" value="clear"/>
-            <input type="button" class="select_all" value="select_all"/>
+            <input type="button" class="select_all" value="select_all" v-on:click.prevent="get"/>
     </div>
 </template>
 
@@ -21,18 +21,34 @@ export default {
     name: 'Workinglist',
     data() {
         return {
-            obj: [
-                {name : 'shashank'},
-                {name : 'sabs'}
-            ],
-            add:'scz'
+            todo: {
+                name : ''
+            },
+            submitted : false,
+            todos:[],
         }
     },
     methods: {
-        addtodo:function() {
-            this.obj.name.push(this.add)
+        post:function() {
+            this.$http.post('https://to-dolist-app.firebaseio.com/posts.json',this.todo).then(function(){
+                this.submitted = true;
+            });
+        },
+        get:function() {
+            this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
+            return data.json;
+        }).then(function(data){
+            this.todos = data.todo;
+        });
         }
-    }
+    },
+    /* created() {
+        this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
+            return data.json;
+        }).then(function(data){
+            this.todos = data;
+        });
+    } */
 }
 </script>
 
