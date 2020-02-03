@@ -3,14 +3,14 @@
             <input type="text" class="todo" placeholder="Write here" v-model="todo.name"/>
             <hr color="darkorange" width="200px"/>
             <div class="content">
-                <p v-for='item in todos' :key="item.name" class="con">
-                    <input type="checkbox"  v-model="todos.name"> 
-                    {{item.name}}
+                <p v-for='item in todos' :key="item" class="con">
+                    <input type="checkbox"> 
+                    {{item}}
                 </p>  
             </div>
             <input type="button" class="add" value="add" v-on:click.prevent="post">
             <input type="button" class="clear" value="clear"/>
-            <input type="button" class="select_all" value="select_all" v-on:click.prevent="get"/>
+            <input type="button" class="select_all" value="select_all"/>
     </div>
 </template>
 
@@ -25,7 +25,9 @@ export default {
                 name : ''
             },
             submitted : false,
-            todos:[],
+            todos:{
+                name = []
+            },
         }
     },
     methods: {
@@ -34,21 +36,21 @@ export default {
                 this.submitted = true;
             });
         },
-        get:function() {
+        /* get:function() {
             this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
             return data.json;
         }).then(function(data){
             this.todos = data.todo;
         });
-        }
+        }  */
     },
-    /* created() {
+        created() {
         this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
             return data.json;
         }).then(function(data){
-            this.todos = data;
+            this.todos = {'shashank','abc'};
         });
-    } */
+    }  
 }
 </script>
 
