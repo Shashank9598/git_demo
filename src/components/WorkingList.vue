@@ -5,7 +5,7 @@
             <div class="content">
                 <p v-for='item in todos' :key="item" class="con">
                     <input type="checkbox"> 
-                    {{item}}
+                    {{item.name}}
                 </p>  
             </div>
             <input type="button" class="add" value="add" v-on:click.prevent="post">
@@ -26,7 +26,7 @@ export default {
             },
             submitted : false,
             todos:{
-                name = []
+                name : []
             },
         }
     },
@@ -36,19 +36,13 @@ export default {
                 this.submitted = true;
             });
         },
-        /* get:function() {
-            this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
-            return data.json;
-        }).then(function(data){
-            this.todos = data.todo;
-        });
-        }  */
     },
         created() {
         this.$http.get('https://to-dolist-app.firebaseio.com/posts.json').then(function(data){
             return data.json;
         }).then(function(data){
-            this.todos = {'shashank','abc'};
+            this.todos = data;
+            this.todos = [{name : 'shashank'},{name :'choudhury'}];
         });
     }  
 }
